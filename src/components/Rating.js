@@ -6,13 +6,14 @@ function Star({ selected = false, rating = 0, onSelect, onHover }) {
   const className = `Rating-star ${selected ? "selected" : ""}`;
 
   const handleClick = onSelect ? () => onSelect(rating) : undefined;
-  const handleMouseOver = onHover ? () => onHover(rating) : undefined;
+
+  const handleMouesOver = onHover ? () => onHover(rating) : undefined;
 
   return (
     <span
       className={className}
       onClick={handleClick}
-      onMouseOver={handleMouseOver}
+      onMouseOver={handleMouesOver}
     >
       ★
     </span>

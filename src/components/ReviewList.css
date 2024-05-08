@@ -1,6 +1,10 @@
+.ReviewList {
+  list-style: none;
+}
+
 .ReviewListItem {
   display: flex;
-  padding: 20px 10px;
+  padding: 30px 0;
   align-items: center;
   border-bottom: 1px dashed #e9e9e9;
 }
@@ -12,8 +16,34 @@
   margin-right: 20px;
 }
 
-.ReviewList {
-  padding: 0 20px;
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+.title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.createdAt {
+  color: #cbcbcb;
+  margin-top: 10px;
+}
+
+.content {
+  margin: 10px 0;
+}
+
+.updateBtn,
+.deleteBtn {
+  font-weight: 600;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.updateBtn {
+  color: #181818;
+  margin-right: 15px;
+}
+
+.deleteBtn {
+  color: #ff3c4f;
 }

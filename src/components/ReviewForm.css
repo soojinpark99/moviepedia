@@ -1,9 +1,94 @@
 .ReviewForm {
   display: flex;
-  flex-direction: column;
-  padding: 10px 0;
+  padding: 30px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin-bottom: 50px;
+  border-radius: 5px;
+  position: relative;
 }
 
-.ReviewForm > :not(:last-child) {
-  margin-bottom: 20px;
+.fileImg {
+  display: block;
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  margin-right: 20px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+#fileInput {
+  display: none;
+}
+
+.rightDiv {
+  width: 100%;
+}
+
+.rightTopDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleInput {
+  background-color: #f9f9f9;
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  height: 55px;
+  padding: 0 20px;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.RatingInput {
+  margin-left: 20px;
+}
+
+.contentInput {
+  background-color: #f9f9f9;
+  border: none;
+  resize: none;
+  outline: none;
+  width: 100%;
+  height: 155px;
+  margin: 25px 0;
+  padding: 20px;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.titleInput::placeholder,
+.contentInput::placeholder {
+  color: #dbdbdb;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submitBtnDiv {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submitBtn {
+  width: 80px;
+  height: 35px;
+  border: none;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.clearBtn {
+  border-radius: 2px;
+  border-width: 1px;
+  width: 20px;
+  cursor: pointer;
+  position: absolute;
+  left: 240px;
+  bottom: 30px;
 }

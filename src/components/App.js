@@ -1,7 +1,13 @@
 import ReviewList from "./ReviewList";
 import { useEffect, useState } from "react";
-import { getReviews } from "../api.js";
+import {
+  createReview,
+  deleteReview,
+  getReviews,
+  updateReview,
+} from "../api.js";
 import ReviewForm from "./ReviewForm.js";
+import "./App.css";
 
 const LIMIT = 6;
 
@@ -16,9 +22,11 @@ function App() {
   const handleNewestClick = () => setOrder("createdAt");
   const handleBestClick = () => setOrder("rating");
 
-  const handleDelete = (id) => {
-    const nextItems = items.filter((item) => item.id !== id);
-    setItems(nextItems);
+  const handleDelete = async (id) => {
+    const result = await deleteReview(id);
+    if (!result) return;
+
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   const handleLoad = async (options) => {
@@ -49,25 +57,66 @@ function App() {
     handleLoad({ order, offset, limit: LIMIT });
   };
 
+  const handleCreateSuccess = (review) => {
+    setItems((prevItems) => [review, ...prevItems]);
+  };
+
+  const handleUpdateSuccess = (review) => {
+    setItems((prevItems) => {
+      const splitIdx = prevItems.findIndex((items) => items.id === review.id);
+      return [
+        ...prevItems.splice(0, splitIdx),
+        review,
+        ...prevItems.slice(splitIdx + 1),
+      ];
+    });
+  };
+
   useEffect(() => {
     handleLoad({ order, offset: 0, limit: LIMIT });
   }, [order]);
 
   return (
-    <div>
+    <main>
+      <ReviewForm
+        onSubmit={createReview}
+        onSubmitSuccess={handleCreateSuccess}
+      />
       <div>
-        <button onClick={handleNewestClick}>최신순</button>
-        <button onClick={handleBestClick}>베스트순</button>
-      </div>
-      <ReviewForm />
-      <ReviewList items={items} onDelete={handleDelete} />
-      {hasNext && (
-        <button disabled={isLoading} onClick={handleLoadMore}>
-          더 보기
+        <button
+          className={
+            "newestBtn" + (order === "createdAt" ? " selectedBtn" : "")
+          }
+          onClick={handleNewestClick}
+        >
+          최신순
         </button>
-      )}
+        <button
+          className={"bestBtn" + (order === "rating" ? " selectedBtn" : "")}
+          onClick={handleBestClick}
+        >
+          베스트순
+        </button>
+      </div>
+      <div className="ReviewContainer">
+        <ReviewList
+          items={items}
+          onDelete={handleDelete}
+          onUpdate={updateReview}
+          onUpdateSuccess={handleUpdateSuccess}
+        />
+        {hasNext && (
+          <button
+            className="moreBtn"
+            disabled={isLoading}
+            onClick={handleLoadMore}
+          >
+            더 보기
+          </button>
+        )}
+      </div>
       {loadingError?.message && <span>{loadingError.message}</span>}
-    </div>
+    </main>
   );
 }
 

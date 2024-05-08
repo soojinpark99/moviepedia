@@ -1,7 +1,9 @@
 .Rating-star {
-  color: slategray;
+  display: inline-block;
+  color: #ffe5a2;
+  font-size: 20px;
 }
 
 .Rating-star.selected {
-  color: yellowgreen;
+  color: #ffb700;
 }
